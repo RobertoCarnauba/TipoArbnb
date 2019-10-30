@@ -12,6 +12,14 @@ const SpotSchema = new mongose.Schema({
         ref: 'User'
     }
 
+},{
+    toJSON: {
+        virtuals: true
+    }
 });
+//Aqui sera criado uma file para rederizar as imagens
+SpotSchema.virtual('thumbnail_url').get(function() {
+    return `http://localhost:3333/files/${this.thumbnail}`
+  })
 
 module.exports = mongose.model('Spot', SpotSchema);
